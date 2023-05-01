@@ -43,5 +43,6 @@ export type { PKTTriggerStartNotify } from "./definitions/PKTTriggerStartNotify"
 export type { PKTTroopMemberUpdateMinNotify } from "./definitions/PKTTroopMemberUpdateMinNotify";
 export type { PKTIdentityGaugeChangeNotify } from "./definitions/PKTIdentityGaugeChangeNotify";
 export type { PKTZoneObjectUnpublishNotify } from "./definitions/PKTZoneObjectUnpublishNotify";
+export type { PKTAuctionSearchResult } from "./definitions/PKTAuctionSearchResult";
 export type { PKTZoneStatusEffectAddNotify } from "./definitions/PKTZoneStatusEffectAddNotify";
 export type { PKTZoneStatusEffectRemoveNotify } from "./definitions/PKTZoneStatusEffectRemoveNotify";

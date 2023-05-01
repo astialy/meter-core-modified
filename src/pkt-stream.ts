@@ -1,5 +1,6 @@
 import { TypedEmitter } from "tiny-typed-emitter";
 import type { Decompressor } from "./decompressor";
+import { PKTAuctionSearchResult } from "./packets/generated/codes";
 import { mapping } from "./packets/generated/mapping";
 import type { PKTStreamEvents } from "./packets/generated/PKTStreamEvents";
 
@@ -24,15 +25,25 @@ export class PKTStream extends TypedEmitter<PKTStreamEvents> {
       const data = buf.subarray(6);
       const opcode = buf.readUInt16LE(2);
 
+      // console.log("Opcode: " + opcode);
+
       const pkt = mapping.get(opcode);
       if (pkt) {
         const [name, read] = pkt;
+        console.log("Opcode: " + opcode + " Pkt: " + name);
+        if(opcode == PKTAuctionSearchResult) {
+          console.log("Opcode: " + opcode + " Pkt: " + name);
+          var p = new PKT(data, opcode, compression, Boolean(xor), this.#decompressor, read);
+          console.log(p.parsed);
+        }
         this.emit(
           name as keyof PKTStreamEvents,
           new PKT(Buffer.from(data), opcode, compression, Boolean(xor), this.#decompressor, read)
         );
+      } else {
+        // console.log("Opcode: " + opcode + " Unknown pkt");
       }
-      this.emit("*", data, opcode, compression, Boolean(xor));
+      // this.emit("*", data, opcode, compression, Boolean(xor));
     } catch (e) {
       return false;
     }

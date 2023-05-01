@@ -79,6 +79,15 @@ export type Esther = {
   npcs: number[];
 };
 
+export type Ability = {
+  id: number;
+  name: string;
+}
+
+export type StatType = {
+  name: string;
+}
+
 export class MeterData {
   dbPath: string = "";
   modulePath: string;
@@ -91,6 +100,8 @@ export class MeterData {
   skillEffect: Map<number, SkillEffect>;
   combatEffect: Map<number, CombatEffect>;
   esther: Esther[];
+  ability: Map<number, Ability>;
+  statType: Map<number, string>;
 
   constructor(meterDataPath: string = "./meter-core/data") {
     this.modulePath = meterDataPath;
@@ -102,6 +113,8 @@ export class MeterData {
     this.skillEffect = new Map();
     this.combatEffect = new Map();
     this.esther = [];
+    this.ability = new Map();
+    this.statType = new Map();
   }
 
   processEnumData(data: { [key: string]: { [key: string]: string } }) {
@@ -109,6 +122,12 @@ export class MeterData {
       const en = new Map();
       for (const [k, v] of Object.entries(edata)) en.set(k, v);
       this.enums.set(ename, en);
+    }
+  }
+
+  processStatType(data: { [key: string]: string}) {
+    for (const [k, v] of Object.entries(data)) {
+      this.statType.set(parseInt(k), v);
     }
   }
 
@@ -145,6 +164,20 @@ export class MeterData {
     for (const combatEffect of Object.values(data)) {
       this.combatEffect.set(combatEffect.id, combatEffect);
     }
+  }
+
+  processAbilityData(data: { [key: string]: Ability }) {
+    for(const ability of Object.values(data)) {
+      this.ability.set(ability.id, ability);
+    }
+  }
+
+  getStatName(id: number) {
+    return this.statType.get(id) || "";
+  }
+
+  getEngravingName(id: number) {
+    return this.ability.get(id)?.name || "";
   }
   processEsther(data: Esther[]) {
     this.esther = Object.values(data);

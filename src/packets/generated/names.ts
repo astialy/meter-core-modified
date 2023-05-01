@@ -42,6 +42,7 @@ export { name as PKTTriggerFinishNotify } from "./definitions/PKTTriggerFinishNo
 export { name as PKTTriggerStartNotify } from "./definitions/PKTTriggerStartNotify";
 export { name as PKTTroopMemberUpdateMinNotify } from "./definitions/PKTTroopMemberUpdateMinNotify";
 export { name as PKTIdentityGaugeChangeNotify } from "./definitions/PKTIdentityGaugeChangeNotify";
+export { name as PKTAuctionSearchResult } from "./definitions/PKTAuctionSearchResult";
 export { name as PKTZoneObjectUnpublishNotify } from "./definitions/PKTZoneObjectUnpublishNotify";
 export { name as PKTZoneStatusEffectAddNotify } from "./definitions/PKTZoneStatusEffectAddNotify";
 export { name as PKTZoneStatusEffectRemoveNotify } from "./definitions/PKTZoneStatusEffectRemoveNotify";
